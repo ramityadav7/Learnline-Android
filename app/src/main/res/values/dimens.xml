@@ -1,3 +1,8 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="item_padding">20dp</dimen>
+
+    <dimen name="text_size_normal">18sp</dimen>
+
+    <dimen name="topic_item_parent_height">200dp</dimen>
+    <dimen name="topic_item_height">100dp</dimen>
 </resources>
