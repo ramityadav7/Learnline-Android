@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -74,6 +75,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
         holder.youTubeThumbnailView1.setTag(position);
         holder.youTubeThumbnailView2.setTag(position);
         holder.imageViewTopic.setTag(position);
+        holder.webViewTopic.setTag(position);
 
         if(topic.isExpanded())
         {
@@ -128,7 +130,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
         }
     }
 
-    public class TopicHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    public class TopicHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnTouchListener
     {
         public TextView textViewTitle;
         public TextView textViewPercentage;
@@ -159,6 +161,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
             relativeLayoutTopic.setOnClickListener(this);
             youTubeThumbnailView1.setOnClickListener(this);
             youTubeThumbnailView2.setOnClickListener(this);
+            webViewTopic.setOnTouchListener(this);
         }
 
         @Override
@@ -195,7 +198,30 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
                     context.startActivity(intent);
                     break;
                 }
+
+
             }
+        }
+
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent)
+        {
+            int position = (int) view.getTag();
+
+            switch (view.getId())
+            {
+                case R.id.webViewTopic:
+                {
+                    if(motionEvent.getAction() == MotionEvent.ACTION_DOWN)
+                    {
+                        Intent intent = new Intent(context, TopicWebviewActivity.class);
+                        intent.putExtra(AppConstant.INTENT_KEY_WEB_VIEW_URL, topics.get(position).getTopicDetail().getWebUrl());
+                        context.startActivity(intent);
+                    }
+                    break;
+                }
+            }
+            return false;
         }
 
         private void launchVideoPlayer(String videoId)

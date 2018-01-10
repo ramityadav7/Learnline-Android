@@ -30,6 +30,13 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity
+            android:name=".screen.home.TopicWebviewActivity"
+            android:label="@string/tille_activity_topic_webview"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>
