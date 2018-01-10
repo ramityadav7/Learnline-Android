@@ -10,14 +10,16 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageViewItem"
+            android:id="@+id/imageViewTopic"
             android:layout_width="match_parent"
             android:layout_height="@dimen/topic_item_height" />
 
-        <VideoView
+        <com.google.android.youtube.player.YouTubeThumbnailView
+            android:id="@+id/youTubeThumbnailView2"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/topic_item_height"
-            />
+            android:layout_height="@dimen/topic_item_height">
+
+        </com.google.android.youtube.player.YouTubeThumbnailView>
 
     </LinearLayout>
 
@@ -27,11 +29,14 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <VideoView
+        <com.google.android.youtube.player.YouTubeThumbnailView
+            android:id="@+id/youTubeThumbnailView1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/topic_item_height" />
+            android:layout_height="@dimen/topic_item_height">
 
+        </com.google.android.youtube.player.YouTubeThumbnailView>
         <WebView
+            android:id="@+id/webViewTopic"
             android:layout_width="match_parent"
             android:layout_height="@dimen/topic_item_height">
 

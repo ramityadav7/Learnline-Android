@@ -10,10 +10,13 @@ import com.assignment.planetspark.learnline.manager.TopicManager;
 import com.assignment.planetspark.learnline.model.home.Topic;
 import com.assignment.planetspark.learnline.screen.BaseActivity;
 import com.assignment.planetspark.learnline.R;
+import com.assignment.planetspark.learnline.screen.BaseVideoActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends BaseActivity
+public class HomeActivity extends BaseActivity implements TopicAdapter.TopicItemEventHandler
 {
     private RecyclerView recyclerViewHome;
     private  TopicAdapter topicAdapter;
@@ -37,7 +40,7 @@ public class HomeActivity extends BaseActivity
         recyclerViewHome = (RecyclerView) findViewById(R.id.recyclerViewHome);
 
         topics = new ArrayList<>();
-        topicAdapter = new TopicAdapter(topics);
+        topicAdapter = new TopicAdapter(this, this, topics);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewHome.setLayoutManager(mLayoutManager);
         recyclerViewHome.setAdapter(topicAdapter);
@@ -48,5 +51,13 @@ public class HomeActivity extends BaseActivity
         ArrayList<Topic> topics = TopicManager.getTopics();
         this.topics.addAll(topics);
         topicAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void handleTopicItemClick(int position)
+    {
+        Topic topic = topics.get(position);
+        topic.setExpanded(!topic.isExpanded());
+        topicAdapter.notifyItemChanged(position);
     }
 }

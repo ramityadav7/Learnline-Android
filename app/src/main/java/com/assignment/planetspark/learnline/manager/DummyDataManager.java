@@ -1,6 +1,7 @@
 package com.assignment.planetspark.learnline.manager;
 
 import com.assignment.planetspark.learnline.model.home.Topic;
+import com.assignment.planetspark.learnline.model.home.TopicDetail;
 
 import java.util.ArrayList;
 
@@ -14,15 +15,20 @@ public class DummyDataManager {
     {
         ArrayList<Topic> topics = new ArrayList<>();
 
-        Topic topic = new Topic();
-        topic.setTitle("Title one");
-        topic.setPercentage(50);
-        topics.add(topic);
+        for(int iterator = 0; iterator < 10; iterator++)
+        {
+            Topic topic = new Topic();
+            topic.setTitle("Title "+iterator);
+            topic.setPercentage(50);
 
-        Topic topic2 = new Topic();
-        topic2.setTitle("Title one");
-        topic2.setPercentage(50);
-        topics.add(topic2);
+            TopicDetail topicDetail = new TopicDetail();
+            topicDetail.setPicture("http://kelpies.us/wp-content/uploads/2017/02/worksheets-snapshot-image-of-lucky-leprechaun-subtraction-worksheet-1.jpg");
+            topicDetail.setWebUrl("https://s3.ap-south-1.amazonaws.com/planetspark-random/animation.html");
+            topicDetail.setVideoOne("_0NsV-tol7s");
+            topicDetail.setVideoTwo("-QU8xG-molE");
+            topic.setTopicDetail(topicDetail);
+            topics.add(topic);
+        }
 
         return topics;
     }
