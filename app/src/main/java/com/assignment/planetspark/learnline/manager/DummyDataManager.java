@@ -15,7 +15,7 @@ public class DummyDataManager {
     {
         ArrayList<Topic> topics = new ArrayList<>();
 
-        for(int iterator = 0; iterator < 10; iterator++)
+        for(int iterator = 0; iterator < 30; iterator++)
         {
             Topic topic = new Topic();
             topic.setTitle("Title "+iterator);

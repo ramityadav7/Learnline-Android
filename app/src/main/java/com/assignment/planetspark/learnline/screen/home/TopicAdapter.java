@@ -3,20 +3,15 @@ package com.assignment.planetspark.learnline.screen.home;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.assignment.planetspark.learnline.R;
 import com.assignment.planetspark.learnline.constants.AppConstant;
@@ -24,8 +19,6 @@ import com.assignment.planetspark.learnline.model.home.Topic;
 import com.assignment.planetspark.learnline.model.home.TopicDetail;
 import com.assignment.planetspark.learnline.utils.AppUtil;
 import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
@@ -84,13 +77,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
         holder.linearLayoutDetailParent.setVisibility(topic.isExpanded() ? View.VISIBLE : View.GONE);
 
         final TopicDetail topicDetail = topic.getTopicDetail();
-        if(topicDetail != null)
+        if(topic.isExpanded() && topicDetail != null)
         {
             Picasso.with(context).load(topicDetail.getPicture()).placeholder(R.drawable.loading).into(holder.imageViewTopic);
             holder.webViewTopic.loadUrl(topicDetail.getWebUrl());
             holder.youTubeThumbnailView1.initialize(AppConstant.YOUTUBE_KEY, new MediaInitializeListener(topicDetail.getVideoOne()));
             holder.youTubeThumbnailView2.initialize(AppConstant.YOUTUBE_KEY, new MediaInitializeListener(topicDetail.getVideoTwo()));
-
         }
     }
 
