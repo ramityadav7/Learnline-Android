@@ -73,6 +73,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
         holder.relativeLayoutTopic.setTag(position);
         holder.youTubeThumbnailView1.setTag(position);
         holder.youTubeThumbnailView2.setTag(position);
+        holder.imageViewTopic.setTag(position);
 
         if(topic.isExpanded())
         {
@@ -154,6 +155,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
             imageViewStatus = view.findViewById(R.id.imageViewStatus);
             viewLine = view.findViewById(R.id.viewLine);
 
+            imageViewTopic.setOnClickListener(this);
             relativeLayoutTopic.setOnClickListener(this);
             youTubeThumbnailView1.setOnClickListener(this);
             youTubeThumbnailView2.setOnClickListener(this);
@@ -183,6 +185,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
                 {
                     String videoId = topics.get(position).getTopicDetail().getVideoTwo();
                     launchVideoPlayer(videoId);
+                    break;
+                }
+
+                case R.id.imageViewTopic:
+                {
+                    Intent intent = new Intent(context, TopicImageActivity.class);
+                    intent.putExtra(AppConstant.INTENT_KEY_IMAGE_URL, topics.get(position).getTopicDetail().getPicture());
+                    context.startActivity(intent);
                     break;
                 }
             }

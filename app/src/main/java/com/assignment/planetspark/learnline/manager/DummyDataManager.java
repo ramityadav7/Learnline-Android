@@ -19,7 +19,7 @@ public class DummyDataManager {
         {
             Topic topic = new Topic();
             topic.setTitle("Title"+iterator);
-            topic.setPercentage(50);
+            topic.setPercentage((iterator*10) % 100);
 
             TopicDetail topicDetail = new TopicDetail();
             topicDetail.setPicture("http://kelpies.us/wp-content/uploads/2017/02/worksheets-snapshot-image-of-lucky-leprechaun-subtraction-worksheet-1.jpg");

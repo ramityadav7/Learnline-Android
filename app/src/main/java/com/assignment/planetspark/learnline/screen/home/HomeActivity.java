@@ -23,8 +23,7 @@ public class HomeActivity extends BaseActivity implements TopicAdapter.TopicItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setActionBar(false);
 
         initializeView();
         populateView();

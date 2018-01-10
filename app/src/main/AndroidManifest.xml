@@ -23,6 +23,13 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".screen.home.TopicImageActivity"
+            android:label="@string/tille_activity_topic_image"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>
