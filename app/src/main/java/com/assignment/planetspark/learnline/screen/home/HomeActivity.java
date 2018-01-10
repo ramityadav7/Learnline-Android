@@ -1,18 +1,14 @@
 package com.assignment.planetspark.learnline.screen.home;
 
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.assignment.planetspark.learnline.R;
 import com.assignment.planetspark.learnline.manager.TopicManager;
 import com.assignment.planetspark.learnline.model.home.Topic;
 import com.assignment.planetspark.learnline.screen.BaseActivity;
-import com.assignment.planetspark.learnline.R;
-import com.assignment.planetspark.learnline.screen.BaseVideoActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
 
 import java.util.ArrayList;
 

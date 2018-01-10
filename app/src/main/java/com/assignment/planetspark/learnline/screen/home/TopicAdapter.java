@@ -1,6 +1,8 @@
 package com.assignment.planetspark.learnline.screen.home;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +26,7 @@ import com.assignment.planetspark.learnline.utils.AppUtil;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
 import com.google.android.youtube.player.YouTubeThumbnailView.OnInitializedListener;
@@ -75,6 +78,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
         holder.textViewPercentage.setText(String.valueOf(topic.getPercentage()));
 
         holder.relativeLayoutTopic.setTag(position);
+        holder.youTubeThumbnailView1.setTag(position);
+        holder.youTubeThumbnailView2.setTag(position);
 
         holder.linearLayoutDetailParent.setVisibility(topic.isExpanded() ? View.VISIBLE : View.GONE);
 
@@ -89,17 +94,6 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
         }
     }
 
-    final YouTubeThumbnailLoader.OnThumbnailLoadedListener  onThumbnailLoadedListener = new YouTubeThumbnailLoader.OnThumbnailLoadedListener(){
-        @Override
-        public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
-        }
-
-        @Override
-        public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
-            youTubeThumbnailView.setVisibility(View.VISIBLE);
-        }
-    };
-
     public class MediaInitializeListener implements OnInitializedListener
     {
         private String video;
@@ -110,9 +104,18 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
         }
 
         @Override
-        public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader youTubeThumbnailLoader) {
+        public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, final YouTubeThumbnailLoader youTubeThumbnailLoader) {
             youTubeThumbnailLoader.setVideo(video);
-            youTubeThumbnailLoader.setOnThumbnailLoadedListener(onThumbnailLoadedListener);
+            youTubeThumbnailLoader.setOnThumbnailLoadedListener(new YouTubeThumbnailLoader.OnThumbnailLoadedListener(){
+                @Override
+                public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
+                }
+
+                @Override
+                public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
+                    youTubeThumbnailLoader.release();
+                }
+            });
         }
 
         @Override
@@ -145,6 +148,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
             youTubeThumbnailView2 = view.findViewById(R.id.youTubeThumbnailView2);
 
             relativeLayoutTopic.setOnClickListener(this);
+            youTubeThumbnailView1.setOnClickListener(this);
+            youTubeThumbnailView2.setOnClickListener(this);
         }
 
         @Override
@@ -159,7 +164,27 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
                     topicItemEventHandler.handleTopicItemClick(position);
                     break;
                 }
+
+                case R.id.youTubeThumbnailView1:
+                {
+                    String videoId = topics.get(position).getTopicDetail().getVideoOne();
+                    launchVideoPlayer(videoId);
+                    break;
+                }
+
+                case R.id.youTubeThumbnailView2:
+                {
+                    String videoId = topics.get(position).getTopicDetail().getVideoTwo();
+                    launchVideoPlayer(videoId);
+                    break;
+                }
             }
+        }
+
+        private void launchVideoPlayer(String videoId)
+        {
+            Intent intent = YouTubeStandalonePlayer.createVideoIntent((Activity) context, AppConstant.YOUTUBE_KEY, videoId);
+            context.startActivity(intent);
         }
     }
 }
