@@ -74,7 +74,18 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
         holder.youTubeThumbnailView1.setTag(position);
         holder.youTubeThumbnailView2.setTag(position);
 
-        holder.linearLayoutDetailParent.setVisibility(topic.isExpanded() ? View.VISIBLE : View.GONE);
+        if(topic.isExpanded())
+        {
+            holder.imageViewStatus.setImageResource(R.drawable.up);
+            holder.linearLayoutDetailParent.setVisibility(View.VISIBLE);
+            holder.viewLine.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            holder.imageViewStatus.setImageResource(R.drawable.down);
+            holder.linearLayoutDetailParent.setVisibility(View.GONE);
+            holder.viewLine.setVisibility(View.GONE);
+        }
 
         final TopicDetail topicDetail = topic.getTopicDetail();
         if(topic.isExpanded() && topicDetail != null)
@@ -126,6 +137,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
         public WebView webViewTopic;
         public YouTubeThumbnailView youTubeThumbnailView1;
         public YouTubeThumbnailView youTubeThumbnailView2;
+        public ImageView imageViewStatus;
+        public TextView viewLine;
 
         public TopicHolder(View view)
         {
@@ -138,6 +151,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
             webViewTopic = view.findViewById(R.id.webViewTopic);
             youTubeThumbnailView1 = view.findViewById(R.id.youTubeThumbnailView1);
             youTubeThumbnailView2 = view.findViewById(R.id.youTubeThumbnailView2);
+            imageViewStatus = view.findViewById(R.id.imageViewStatus);
+            viewLine = view.findViewById(R.id.viewLine);
 
             relativeLayoutTopic.setOnClickListener(this);
             youTubeThumbnailView1.setOnClickListener(this);

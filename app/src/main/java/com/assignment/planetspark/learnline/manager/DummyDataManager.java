@@ -18,7 +18,7 @@ public class DummyDataManager {
         for(int iterator = 0; iterator < 30; iterator++)
         {
             Topic topic = new Topic();
-            topic.setTitle("Title "+iterator);
+            topic.setTitle("Title"+iterator);
             topic.setPercentage(50);
 
             TopicDetail topicDetail = new TopicDetail();

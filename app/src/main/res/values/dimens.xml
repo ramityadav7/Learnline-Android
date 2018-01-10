@@ -5,4 +5,6 @@
 
     <dimen name="topic_item_parent_height">200dp</dimen>
     <dimen name="topic_item_height">100dp</dimen>
+
+    <dimen name="home_item_margin">10dp</dimen>
 </resources>
